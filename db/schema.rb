@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140203004728) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "assets", force: true do |t|
     t.string   "asset"
     t.integer  "ticket_id"
@@ -31,8 +34,8 @@ ActiveRecord::Schema.define(version: 20140203004728) do
     t.integer  "previous_state_id"
   end
 
-  add_index "comments", ["ticket_id"], name: "index_comments_on_ticket_id"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["ticket_id"], name: "index_comments_on_ticket_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "permissions", force: true do |t|
     t.integer  "user_id"
@@ -84,8 +87,8 @@ ActiveRecord::Schema.define(version: 20140203004728) do
     t.integer  "state_id"
   end
 
-  add_index "tickets", ["project_id"], name: "index_tickets_on_project_id"
-  add_index "tickets", ["user_id"], name: "index_tickets_on_user_id"
+  add_index "tickets", ["project_id"], name: "index_tickets_on_project_id", using: :btree
+  add_index "tickets", ["user_id"], name: "index_tickets_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
